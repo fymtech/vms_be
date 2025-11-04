@@ -1,0 +1,9 @@
+{
+  "smtp": 1025,
+  "web": 1080,
+  "mongo": "mongodb://localhost:27017/maildev",
+  "mongoOptions": {
+    "useNewUrlParser": true,
+    "useUnifiedTopology": true
+  }
+}
