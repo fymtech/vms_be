@@ -31,7 +31,7 @@ const authenticateToken = (req, res, next) => {
 
 const checkUserType = async (req, res, next) => {
   try {
-    const userType = req.originalUrl.split("/")[2]; // "customer" in "/api/customer/home-page"
+    const userType = req.originalUrl.split("/")[2];
     console.log(userType);
     const token = await Tokens.findOne({ token: req.authToken });
     if (!token || token == null) {
@@ -44,18 +44,6 @@ const checkUserType = async (req, res, next) => {
       return res.status(response.httpResponse).send(response);
     }
     switch (userType) {
-      case "customer":
-        if (token.customer == null) {
-          const responseC = responseHandler(
-            CustomErrorResponse.INVALID_TOKEN,
-            "",
-            false,
-            status.UNAUTHORIZED
-          );
-          return res.status(responseC.httpResponse).send(responseC);
-        }
-        next();
-        break;
       case "admin":
         if (token.admin == null) {
           const responseC = responseHandler(

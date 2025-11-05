@@ -1,7 +1,6 @@
 module.exports.Admins = require("./admin.model");
 module.exports.Cities = require("./city.model");
 module.exports.Countries = require("./country.model");
-module.exports.Customers = require("./customer.model");
 module.exports.Permissions = require("./permission.model");
 module.exports.ResourceActions = require("./resource.action.model");
 module.exports.Resources = require("./resource.model");

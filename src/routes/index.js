@@ -6,7 +6,6 @@ const router = express.Router();
 // Import routes
 const authRoutes = require("./auth.route");
 const adminRoutes = require("./admin.route");
-const customerRoutes = require("./customer.route");
 
 const defaultRoutes = [
   {
@@ -16,10 +15,6 @@ const defaultRoutes = [
   {
     path: "/api/admin",
     route: adminRoutes,
-  },
-  {
-    path: "/api/customer",
-    route: customerRoutes,
   },
 ];
 
