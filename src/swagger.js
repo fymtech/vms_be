@@ -7,10 +7,10 @@ function swaggerDocs(app) {
   let swaggerDocument = {
     openapi: "3.0.0",
     info: {
-      title: "Hospital Management System API",
+      title: "Visa and Iqama Management System API",
       version: "1.0.0",
       description:
-        "API documentation for the Hospital Management System Project",
+        "API documentation for the Visa and Iqama Management System Project",
     },
     servers: [
       {
