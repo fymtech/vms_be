@@ -16,6 +16,19 @@ const verfiyEmail = async (req, res) => {
   }
 };
 
+const getAllAdmins = async (req, res) => {
+  try {
+    const response = await adminService.getAllAdmins();
+    if (response.status == false)
+      res.status(response.httpResponse).send(response);
+    else res.status(httpStatus.OK).send(response);
+  } catch (error) {
+    const errorResponse = errorResponseHandler(error);
+    res.status(errorResponse.httpResponse).send(errorResponse);
+  }
+};
+
 module.exports = {
   verfiyEmail,
+  getAllAdmins,
 };

@@ -65,6 +65,12 @@ app.use((req, res, next) => {
 app.use(cors());
 // app.options("*", cors());
 
+// Redirect to API docs if root URL is accessed
+app.get("/", (req, res) => {
+  res.redirect("/api-docs");
+});
+
+// App routes
 app.use("", routes);
 
 app.listen(process.env.PORT, () => {

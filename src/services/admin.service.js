@@ -8,6 +8,7 @@ const {
 const {
   CustomSuccessResponse,
   CustomErrorResponse,
+  notFoundResponse,
 } = require("../helpers/constants");
 const { generateLoginAuthToken } = require("../helpers/utils");
 const { Admins, Tokens } = require("../models");
@@ -49,7 +50,7 @@ const verifyEmail = async (email) => {
         notFoundResponse(`Admin with email: ${email}`),
         null,
         false,
-        httpStatus.NOT_FOUND,
+        status.NOT_FOUND,
         true
       );
     if (admin.isEmailVerified)
@@ -60,7 +61,7 @@ const verifyEmail = async (email) => {
           ".",
         null,
         false,
-        httpStatus.CONFLICT,
+        status.CONFLICT,
         false
       );
     admin.isEmailVerified = true;
@@ -81,7 +82,7 @@ const login = async (email, password, deviceType) => {
         "Username or password is empty.",
         null,
         false,
-        httpStatus.BAD_REQUEST,
+        status.BAD_REQUEST,
         true
       );
     const admin = await Admins.findOne({ email: email });
@@ -90,7 +91,7 @@ const login = async (email, password, deviceType) => {
         notFoundResponse(`Admin with email: ${email}`),
         null,
         false,
-        httpStatus.NOT_FOUND,
+        status.NOT_FOUND,
         true
       );
     const isValidPassword = await admin.isValidPassword(password);
@@ -99,7 +100,7 @@ const login = async (email, password, deviceType) => {
         CustomErrorResponse.INCORRECT_PASSWORD,
         null,
         false,
-        httpStatus.FORBIDDEN,
+        status.FORBIDDEN,
         true
       );
     const loginToken = await generateLoginAuthToken(admin);
@@ -136,7 +137,7 @@ const logout = async (user, authToken) => {
         notFoundResponse("Token"),
         null,
         false,
-        httpStatus.FORBIDDEN,
+        status.FORBIDDEN,
         true
       );
     if (!token.admin || token.admin == null)
@@ -144,7 +145,7 @@ const logout = async (user, authToken) => {
         "Not admin's token.",
         null,
         false,
-        httpStatus.BAD_REQUEST,
+        status.BAD_REQUEST,
         true
       );
     const admin = await Admins.findOne({
@@ -155,7 +156,7 @@ const logout = async (user, authToken) => {
         notFoundResponse(`Admin with id: ${user.userId}`),
         null,
         false,
-        httpStatus.NOT_FOUND,
+        status.NOT_FOUND,
         true
       );
     admin.status = 0;
@@ -172,9 +173,29 @@ const logout = async (user, authToken) => {
   }
 };
 
+const getAllAdmins = async () => {
+  try {
+    const admins = await Admins.find();
+    if (!admins || admins.length === 0) {
+      return responseHandler(
+        notFoundResponse("Admins"),
+        [],
+        false,
+        status.NOT_FOUND,
+        true
+      );
+    }
+    return responseHandler(CustomSuccessResponse.FETCHED, admins);
+  } catch (error) {
+    console.error("Error occured while fetching admins: ", error);
+    return errorResponseHandler(error);
+  }
+};
+
 module.exports = {
   register,
   verifyEmail,
   login,
   logout,
+  getAllAdmins,
 };

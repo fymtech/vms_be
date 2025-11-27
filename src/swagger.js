@@ -14,7 +14,7 @@ function swaggerDocs(app) {
     },
     servers: [
       {
-        url: "http://localhost:3333",
+        url: "http://localhost:3334",
         description: "Local server",
       },
     ],

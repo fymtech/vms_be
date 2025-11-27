@@ -6,7 +6,7 @@ const RoleSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      enum: ["ADMIN", "SUPPORT"],
+      enum: ["ADMIN", "CLIENT"],
     },
   },
   { timestamps: true, collection: "Roles" }

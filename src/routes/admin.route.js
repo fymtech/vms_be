@@ -12,4 +12,6 @@ router.post(
   adminController.verfiyEmail
 );
 
+router.get("/", adminController.getAllAdmins);
+
 module.exports = router;

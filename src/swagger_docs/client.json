@@ -8,7 +8,7 @@
   "paths": {
     "/api/admin/verify/email": {
       "post": {
-        "tags": ["Admin Controller"],
+        "tags": ["Client Controller"],
         "summary": "Verifies a admin's email if it exists in the system",
         "description": "This endpoint checks if the provided email exists in the system and verifies the email if it does.",
         "parameters": [
@@ -99,7 +99,7 @@
     },
     "/api/admin/": {
       "get": {
-        "tags": ["Admin Controller"],
+        "tags": ["Client Controller"],
         "summary": "Fetches all the admins if they exist in the system",
         "description": "This endpoint fetches all the admin user profiles if they exist in the system.",
         "responses": {
