@@ -13,12 +13,6 @@ const clientRegister = Joi.object({
     countryId: Joi.string()
       .custom(objectIdValidator, "ObjectId validation")
       .required(),
-    stateId: Joi.string()
-      .custom(objectIdValidator, "ObjectId validation")
-      .required(),
-    cityId: Joi.string()
-      .custom(objectIdValidator, "ObjectId validation")
-      .required(),
     address: Joi.string().max(255).required(),
     postalCode: Joi.string().required(),
     role: Joi.string().valid("ADMIN").required(),

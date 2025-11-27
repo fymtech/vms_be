@@ -10,17 +10,6 @@ const adminRegister = Joi.object({
     countryCode: Joi.string().min(3).required(),
     phone: Joi.string().min(9).max(10).required(),
     password: Joi.string().min(8).required(),
-    countryId: Joi.string()
-      .custom(objectIdValidator, "ObjectId validation")
-      .required(),
-    stateId: Joi.string()
-      .custom(objectIdValidator, "ObjectId validation")
-      .required(),
-    cityId: Joi.string()
-      .custom(objectIdValidator, "ObjectId validation")
-      .required(),
-    address: Joi.string().max(255).required(),
-    postalCode: Joi.string().required(),
     role: Joi.string().valid("ADMIN").required(),
     deviceType: Joi.number().required(), // 0 for android, 1 for ios, 2 for web
     locale: Joi.string().required(),
