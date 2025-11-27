@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const swaggerUi = require("swagger-ui-express");
+const basicAuth = require("express-basic-auth");
 
 function swaggerDocs(app) {
   const swaggerDocsPath = path.join(__dirname, "./swagger_docs");
@@ -48,7 +49,15 @@ function swaggerDocs(app) {
     swaggerDocument.paths = { ...swaggerDocument.paths, ...routeDoc.paths };
   });
 
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  app.use(
+    "/api-docs",
+    basicAuth({
+      users: { fymtech: "FYmTech@2025!?" },
+      challenge: true,
+    }),
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument)
+  );
 }
 
 module.exports = swaggerDocs;
