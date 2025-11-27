@@ -14,6 +14,10 @@ function swaggerDocs(app) {
     },
     servers: [
       {
+        url: "https://vms-be-9drd.onrender.com",
+        description: "Render server",
+      },
+      {
         url: "http://localhost:3334",
         description: "Local server",
       },
