@@ -21,19 +21,17 @@ const register = async (body, roleId) => {
       ...body,
       registeredAt: new Date(),
       status: 0,
-      active: 1,
       isEmailVerified: 0,
       isPhoneVerified: 0,
-      walletBalance: 0.0,
     });
     console.log("Admin registered successfully:", admin);
     // Send OTP to the admin in a separate thread (non-blocking)
     // setImmediate(() => {
     //   sendVerificationEmail(admin.email);
     // });
-    setTimeout(() => {
-      sendVerificationEmail(admin.email, "admin");
-    }, 5000);
+    // setTimeout(() => {
+    //   sendVerificationEmail(admin.email, "admin");
+    // }, 5000);
     return responseHandler(CustomSuccessResponse.REGISTERED, null);
   } catch (error) {
     console.error("Error registering admin:", error);

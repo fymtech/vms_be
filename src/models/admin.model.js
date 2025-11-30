@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-
-const { commonUserFields } = require("../helpers/constants");
+const validator = require("validator");
 
 const AdminSchema = new mongoose.Schema(
   {

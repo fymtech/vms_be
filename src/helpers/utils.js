@@ -1,7 +1,7 @@
 const { status: httpStatus } = require("http-status");
 const fs = require("fs");
 const path = require("path");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const nodemailer = require("nodemailer");
 

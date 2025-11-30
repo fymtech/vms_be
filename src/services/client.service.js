@@ -21,7 +21,7 @@ const register = async (body, userType) => {
         true
       );
     }
-    console.log("Registering user with type:", role._id, "in client service");
+    console.log("Registering user with role:", role._id, "in client service");
     const client = await Clients.create({
       ...body,
       role: role._id,
