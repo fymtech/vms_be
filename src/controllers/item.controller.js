@@ -1,9 +1,9 @@
-const authService = require("../services/auth.service");
+const itemService = require("../services/item.service");
 const { errorResponseHandler } = require("../helpers/utils");
 
-const register = async (req, res) => {
+const create = async (req, res) => {
   try {
-    const response = await authService.register(req.body, "ADMIN");
+    const response = await itemService.create(req.body);
     res.status(response.httpResponse).send(response);
   } catch (error) {
     const errorResponse = errorResponseHandler(error);
@@ -11,9 +11,9 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+const getAll = async (req, res) => {
   try {
-    const response = await authService.login(req.body, req.params.userType);
+    const response = await itemService.getAll();
     res.status(response.httpResponse).send(response);
   } catch (error) {
     const errorResponse = errorResponseHandler(error);
@@ -21,13 +21,19 @@ const login = async (req, res) => {
   }
 };
 
-const logout = async (req, res) => {
+const updateById = async (req, res) => {
   try {
-    const response = await authService.logout(
-      req.user,
-      req.authToken,
-      req.params.userType
-    );
+    const response = await itemService.updateById(req.body);
+    res.status(response.httpResponse).send(response);
+  } catch (error) {
+    const errorResponse = errorResponseHandler(error);
+    res.status(errorResponse.httpResponse).send(errorResponse);
+  }
+};
+
+const deleteById = async (req, res) => {
+  try {
+    const response = await itemService.deleteById(req.body.id);
     res.status(response.httpResponse).send(response);
   } catch (error) {
     const errorResponse = errorResponseHandler(error);
@@ -36,7 +42,8 @@ const logout = async (req, res) => {
 };
 
 module.exports = {
-  register,
-  login,
-  logout,
+  create,
+  getAll,
+  updateById,
+  deleteById,
 };

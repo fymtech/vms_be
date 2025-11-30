@@ -111,10 +111,12 @@
                   "message": "Fetched successfully.",
                   "data": [
                     {
-                      "id": "<admin_id>",
-                      "name": "<admin_name>",
-                      "email": "<admin_email>",
-                      "phone": "<admin_phone>"
+                      "id": "<Mongodb generated id>",
+                      "name": "Admin Name",
+                      "email": "amdin@mail.com",
+                      "countryCode": "+966",
+                      "phone": "543485942",
+                      "status": "active"
                     }
                   ],
                   "status": true,
@@ -130,6 +132,80 @@
               "application/json": {
                 "example": {
                   "message": "Admins not found.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 404,
+                  "isError": true
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 500,
+                  "isError": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/{id}": {
+      "get": {
+        "tags": ["Admin Controller"],
+        "summary": "Fetches the required info of the Admin",
+        "description": "This endpoint fetches the required information about the admin by id if it exists in the system.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The mongodb generated id of the admin."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetched successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Fetched successfully.",
+                  "data": [
+                    {
+                      "id": "<Mongodb generated id>",
+                      "name": "Admin Name",
+                      "email": "amdin@mail.com",
+                      "countryCode": "+966",
+                      "phone": "543485942",
+                      "deviceType": 2,
+                      "profileImage": "<Image url>",
+                      "lastLoggedInAt": "<Date and Time>",
+                      "status": "active"
+                    }
+                  ],
+                  "status": true,
+                  "httpResponse": 200,
+                  "isError": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Admin with id: <id> not found.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 404,

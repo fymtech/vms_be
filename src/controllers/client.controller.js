@@ -1,9 +1,9 @@
-const authService = require("../services/auth.service");
+const clientService = require("../services/client.service");
 const { errorResponseHandler } = require("../helpers/utils");
 
 const register = async (req, res) => {
   try {
-    const response = await authService.register(req.body, "ADMIN");
+    const response = await clientService.register(req.body, "CLIENT");
     res.status(response.httpResponse).send(response);
   } catch (error) {
     const errorResponse = errorResponseHandler(error);
@@ -11,9 +11,9 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+const getAllClients = async (req, res) => {
   try {
-    const response = await authService.login(req.body, req.params.userType);
+    const response = await clientService.getAllClients();
     res.status(response.httpResponse).send(response);
   } catch (error) {
     const errorResponse = errorResponseHandler(error);
@@ -21,13 +21,9 @@ const login = async (req, res) => {
   }
 };
 
-const logout = async (req, res) => {
+const getClientById = async (req, res) => {
   try {
-    const response = await authService.logout(
-      req.user,
-      req.authToken,
-      req.params.userType
-    );
+    const response = await clientService.getClientById(req.params.id);
     res.status(response.httpResponse).send(response);
   } catch (error) {
     const errorResponse = errorResponseHandler(error);
@@ -36,7 +32,7 @@ const logout = async (req, res) => {
 };
 
 module.exports = {
+  getAllClients,
+  getClientById,
   register,
-  login,
-  logout,
 };

@@ -25,12 +25,9 @@ app.use(express.json());
 
 // parse urlencoded request body
 /* This is necessary for form submissions and URL-encoded data
- * It allows the server to parse data sent in the body of a request
- * with the 'application/x-www-form-urlencoded' content type
- * The 'extended: true' option allows for rich objects and arrays to be encoded
- * into the URL-encoded format, using the qs library
- * If set to false, the querystring library is used instead, which does not support nested
- * objects and arrays
+ * It allows the server to parse data sent in the body of a request with the 'application/x-www-form-urlencoded' content type
+ * The 'extended: true' option allows for rich objects and arrays to be encoded into the URL-encoded format, using the qs library
+ * If set to false, the querystring library is used instead, which does not support nested objects and arrays
  */
 app.use(express.urlencoded({ extended: true }));
 

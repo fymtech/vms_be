@@ -6,11 +6,10 @@ const adminRegister = Joi.object({
     firstName: Joi.string().min(3).max(20).required(),
     lastName: Joi.string().min(3).max(20).required(),
     email: Joi.string().email().required(),
-    gender: Joi.string().required().valid("MALE", "FEMALE"),
     countryCode: Joi.string().min(3).required(),
     phone: Joi.string().min(9).max(10).required(),
     password: Joi.string().min(8).required(),
-    role: Joi.string().valid("ADMIN").required(),
+    // role: Joi.string().valid("ADMIN").required(),
     deviceType: Joi.number().required(), // 0 for android, 1 for ios, 2 for web
     locale: Joi.string().required(),
     profileImage: Joi.string().allow("").optional(),

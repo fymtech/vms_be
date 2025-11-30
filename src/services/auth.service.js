@@ -25,7 +25,7 @@ const register = async (body, userType) => {
     }
     switch (userType) {
       case "ADMIN":
-        const responseA = await adminService.register(body, role._id);
+        const responseA = await adminService.register(body);
         console.log("Admin registration response in auth service:", responseA);
         return responseA;
 

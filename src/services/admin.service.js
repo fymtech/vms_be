@@ -176,7 +176,8 @@ const logout = async (user, authToken) => {
 const getAllAdmins = async () => {
   try {
     const admins = await Admins.find();
-    if (!admins || admins.length === 0) {
+
+    if (!admins || admins.length == 0) {
       return responseHandler(
         notFoundResponse("Admins"),
         [],
@@ -185,9 +186,70 @@ const getAllAdmins = async () => {
         true
       );
     }
-    return responseHandler(CustomSuccessResponse.FETCHED, admins);
+
+    const adminsInfo = admins.map(
+      ({
+        _id: id,
+        firstName,
+        lastName,
+        email,
+        countryCode,
+        phone,
+        status,
+      }) => ({
+        id,
+        name: `${firstName} ${lastName}`,
+        email,
+        countryCode,
+        phone,
+        status,
+      })
+    );
+
+    return responseHandler(CustomSuccessResponse.FETCHED, adminsInfo);
   } catch (error) {
-    console.error("Error occured while fetching admins: ", error);
+    console.error("Error fetching admins:", error);
+    return errorResponseHandler(error);
+  }
+};
+
+const getAdminById = async (adminId) => {
+  try {
+    const admin = await Admins.findById(adminId);
+    if (!admin)
+      return responseHandler(
+        notFoundResponse(`Admin with id: ${adminId}`),
+        null,
+        false,
+        status.NOT_FOUND,
+        true
+      );
+
+    const {
+      _id: id,
+      firstName,
+      lastName,
+      email,
+      countryCode,
+      phone,
+      deviceType,
+      profileImage,
+      loggedInAt,
+      status,
+    } = admin;
+    return responseHandler(CustomSuccessResponse.FETCHED, {
+      id,
+      name: `${firstName} ${lastName}`,
+      email,
+      countryCode,
+      phone,
+      deviceType,
+      profileImage,
+      lastLoggedInAt: loggedInAt,
+      status,
+    });
+  } catch (error) {
+    console.error("Error fetching admin info:", error);
     return errorResponseHandler(error);
   }
 };
@@ -198,4 +260,5 @@ module.exports = {
   login,
   logout,
   getAllAdmins,
+  getAdminById,
 };

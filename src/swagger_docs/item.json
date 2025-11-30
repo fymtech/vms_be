@@ -6,22 +6,17 @@
     "description": "API documentation for Auth endpoint"
   },
   "paths": {
-    "/api/client/register": {
+    "/api/item/": {
       "post": {
-        "tags": ["Client Controller"],
-        "summary": "Registers a client in the system",
-        "description": "Registers a client in the system with the provided details.",
+        "tags": ["Item Controller"],
+        "summary": "Creates an item for the inventory",
+        "description": "Creates an item for the inventory with the provided details.",
         "requestBody": {
           "content": {
             "application/json": {
               "example": {
-                "firstName": "John",
-                "lastName": "Doe",
-                "email": "johndoe@mail.com",
-                "countryCode": "+91",
-                "phone": "1234567890",
-                "countryId": "686b9fc0de470e6df8db5eb5",
-                "profileImage": "default.png"
+                "name_en": "1 year visa",
+                "name_ar": "1 year visa"
               }
             }
           },
@@ -29,11 +24,11 @@
         },
         "responses": {
           "200": {
-            "description": "Successfully registered the client.",
+            "description": "Successfully created the item.",
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Registered Succesfully.",
+                  "message": "Created Succesfully.",
                   "data": null,
                   "status": true,
                   "httpResponse": 200,
@@ -47,7 +42,128 @@
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Data validation error/Invalid parameter ID/Invalid user type.",
+                  "message": "Data validation error.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 400,
+                  "isError": true
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 500,
+                  "isError": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Item Controller"],
+        "summary": "Fetches all the items",
+        "description": "This endpoint fetches all the item names in english and arabic if they exist in the system.",
+        "responses": {
+          "200": {
+            "description": "Fetched successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Fetched successfully.",
+                  "data": [
+                    {
+                      "id": "<Mongodb generated id>",
+                      "name_en": "1 year visa",
+                      "name_ar": "1 year visa"
+                    },
+                    {
+                      "id": "<Mongodb generated id>",
+                      "name_en": "3 month visa",
+                      "name_ar": "3 month visa"
+                    }
+                  ],
+                  "status": true,
+                  "httpResponse": 200,
+                  "isError": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Items not found.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 404,
+                  "isError": true
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 500,
+                  "isError": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Item Controller"],
+        "summary": "Updates an item.",
+        "description": "Updates an item name in english and/or arabic if it exists in the system.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "id": "<Mongodb generated item id>",
+                "name_en": "1 year visa",
+                "name_ar": "1 year visa"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the item.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Updated Succesfully.",
+                  "data": null,
+                  "status": true,
+                  "httpResponse": 200,
+                  "isError": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Data validation error/Invalid parameter ID.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 400,
@@ -61,87 +177,7 @@
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Role/User type not found.",
-                  "data": "<Error details or null>",
-                  "status": false,
-                  "httpResponse": 404,
-                  "isError": true
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict error due to duplicate value in request body (already exists in db)",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "<key> '<value>' already exists",
-                  "data": "<Error details or null>",
-                  "status": false,
-                  "httpResponse": 409,
-                  "isError": true
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Internal server error",
-                  "data": "<Error details or null>",
-                  "status": false,
-                  "httpResponse": 500,
-                  "isError": true
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/client/": {
-      "get": {
-        "tags": ["Client Controller"],
-        "summary": "Fetches all the client if they exist in the system",
-        "description": "This endpoint fetches all the client profiles if they exist in the system.",
-        "responses": {
-          "200": {
-            "description": "Fetched successfully.",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Fetched successfully.",
-                  "data": [
-                    {
-                      "id": "<Mongodb generated id>",
-                      "name": "Client 1 Name",
-                      "email": "client1@mail.com",
-                      "countryCode": "+966",
-                      "phone": "543485942"
-                    },
-                    {
-                      "id": "<Mongodb generated id>",
-                      "name": "Client 2 Name",
-                      "email": "client2@mail.com",
-                      "countryCode": "+966",
-                      "phone": "536746534"
-                    }
-                  ],
-                  "status": true,
-                  "httpResponse": 200,
-                  "isError": false
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Clients not found.",
+                  "message": "Item with id: <id> not found.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 404,
@@ -165,44 +201,46 @@
             }
           }
         }
-      }
-    },
-    "/api/client/{id}": {
-      "get": {
-        "tags": ["Client Controller"],
-        "summary": "Fetches the required info of the client",
-        "description": "This endpoint fetches the required information about the client by id if it exists in the system.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The mongodb generated id of the client."
-          }
-        ],
+      },
+      "delete": {
+        "tags": ["Item Controller"],
+        "summary": "Deletes an item.",
+        "description": "Deletes an item if it exists in the system.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "id": "<Mongodb generated item id>"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
-            "description": "Fetched successfully.",
+            "description": "Successfully deleted the item.",
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Fetched successfully.",
-                  "data": [
-                    {
-                      "id": "<Mongodb generated id>",
-                      "name": "CLient 1 Name",
-                      "email": "client1@mail.com",
-                      "countryCode": "+966",
-                      "phone": "543485942",
-                      "profileImage": "<Image url>"
-                    }
-                  ],
+                  "message": "Deleted Succesfully.",
+                  "data": null,
                   "status": true,
                   "httpResponse": 200,
                   "isError": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Data validation error/Invalid parameter ID.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 400,
+                  "isError": true
                 }
               }
             }
@@ -212,7 +250,7 @@
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Client with id: <id> not found.",
+                  "message": "Item with id: <id> not found.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 404,
