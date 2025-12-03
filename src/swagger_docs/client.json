@@ -56,6 +56,20 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Access Denied. No token provided./Invalid token/Access token expired at <Date>. Please login again.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 401,
+                  "isError": true
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not found",
             "content": {
@@ -89,7 +103,7 @@
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Internal server error",
+                  "message": "Internal server error/ Could not perform action.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 500,
@@ -136,6 +150,20 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Access Denied. No token provided./Invalid token/Access token expired at <Date>. Please login again.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 401,
+                  "isError": true
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not found",
             "content": {
@@ -155,7 +183,7 @@
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Internal server error",
+                  "message": "Internal server error/ Could not perform action.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 500,
@@ -207,6 +235,20 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Access Denied. No token provided./Invalid token/Access token expired at <Date>. Please login again.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 401,
+                  "isError": true
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not found",
             "content": {
@@ -226,7 +268,7 @@
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Internal server error",
+                  "message": "Internal server error/ Could not perform action.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 500,

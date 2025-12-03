@@ -6,17 +6,31 @@
     "description": "API documentation for Auth endpoint"
   },
   "paths": {
-    "/api/country/": {
+    "/api/inventory/": {
       "post": {
-        "tags": ["Country Controller"],
-        "summary": "Creates a country for the inventory",
-        "description": "Creates a country for the inventory with the provided details.",
+        "tags": ["Inventory Controller"],
+        "summary": "Creates an inventory entry",
+        "description": "Creates an inventory entry with the provided details. Note that all amounts are in riyal. Only the item and client are mandatory fields.",
         "requestBody": {
           "content": {
             "application/json": {
               "example": {
-                "name_en": "India",
-                "name_ar": "Al Hind"
+                "item": "<Mongodb generated item id",
+                "client": "<Mongodb generated client id>",
+                "visaProfession": "<Mongodb generated visa profession id>",
+                "nationality": "<Mongodb generated nationality id>",
+                "quantity": 100,
+                "embassy": "Indian Embassy",
+                "cost": 1500,
+                "total": 150000,
+                "paidAmount": 50000,
+                "pending": 100000,
+                "visaNumber": "V123456789",
+                "unitedNumber": "U987654321",
+                "establishmentNumber": "E123456789",
+                "comments": "Urgent processing required",
+                "modeOfPayment": "Card",
+                "dateOfPayment": "2024-01-15"
               }
             }
           },
@@ -24,7 +38,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfully created the country.",
+            "description": "Successfully created the inventory entry.",
             "content": {
               "application/json": {
                 "example": {
@@ -42,7 +56,7 @@
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Data validation error.",
+                  "message": "Data validation error./Invalid parameter ID.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 400,
@@ -82,9 +96,9 @@
         }
       },
       "get": {
-        "tags": ["Country Controller"],
-        "summary": "Fetches all the countries",
-        "description": "This endpoint fetches all the country names in english and arabic if they exist in the system.",
+        "tags": ["Inventory Controller"],
+        "summary": "Fetches all the inventories.",
+        "description": "This endpoint fetches all the inventories with minimum details if they exist in the system.",
         "responses": {
           "200": {
             "description": "Fetched successfully.",
@@ -92,18 +106,7 @@
               "application/json": {
                 "example": {
                   "message": "Fetched successfully.",
-                  "data": [
-                    {
-                      "id": "<Mongodb generated id>",
-                      "name_en": "1 year visa",
-                      "name_ar": "1 year visa"
-                    },
-                    {
-                      "id": "<Mongodb generated id>",
-                      "name_en": "3 month visa",
-                      "name_ar": "3 month visa"
-                    }
-                  ],
+                  "data": [{}, {}, "..."],
                   "status": true,
                   "httpResponse": 200,
                   "isError": false
@@ -130,7 +133,7 @@
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Countries not found.",
+                  "message": "Inventories not found.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 404,
@@ -156,38 +159,38 @@
         }
       },
       "put": {
-        "tags": ["Country Controller"],
-        "summary": "Updates a country.",
-        "description": "Updates a country name in english and/or arabic if it exists in the system.",
+        "tags": ["Inventory Controller"],
+        "summary": "Updates the inventory.",
+        "description": "Updates the inventory provided by the id, if it exists in the system.",
         "requestBody": {
           "content": {
             "application/json": {
               "example": {
-                "id": "<Mongodb generated country id>",
-                "name_en": "India",
-                "name_ar": "Al Hind"
+                "id": "<Mongodb generated inventory id>",
+                "item": "<Mongodb generated item id",
+                "client": "<Mongodb generated client id>",
+                "visaProfession": "<Mongodb generated visa profession id>",
+                "nationality": "<Mongodb generated nationality id>",
+                "quantity": 100,
+                "embassy": "Indian Embassy",
+                "cost": 1500,
+                "total": 150000,
+                "paidAmount": 50000,
+                "pending": 100000,
+                "visaNumber": "V123456789",
+                "unitedNumber": "U987654321",
+                "establishmentNumber": "E123456789",
+                "comments": "Urgent processing required",
+                "modeOfPayment": "Card",
+                "dateOfPayment": "2024-01-15"
               }
             }
           },
           "required": true
         },
-        "401": {
-          "description": "Unauthorized",
-          "content": {
-            "application/json": {
-              "example": {
-                "message": "Access Denied. No token provided./Invalid token/Access token expired at <Date>. Please login again.",
-                "data": "<Error details or null>",
-                "status": false,
-                "httpResponse": 401,
-                "isError": true
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "Successfully updated the country.",
+            "description": "Successfully updated the inventory.",
             "content": {
               "application/json": {
                 "example": {
@@ -214,12 +217,26 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Access Denied. No token provided./Invalid token/Access token expired at <Date>. Please login again.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 401,
+                  "isError": true
+                }
+              }
+            }
+          },
           "404": {
             "description": "Not found",
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Country with id: <id> not found.",
+                  "message": "Inventory with id: <id> not found.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 404,
@@ -245,14 +262,14 @@
         }
       },
       "delete": {
-        "tags": ["Country Controller"],
-        "summary": "Deletes a country.",
-        "description": "Deletes a country if it exists in the system.",
+        "tags": ["Inventory Controller"],
+        "summary": "Deletes the inventory entry.",
+        "description": "Deletes the inventory entry if it exists in the system.",
         "requestBody": {
           "content": {
             "application/json": {
               "example": {
-                "id": "<Mongodb generated country id>"
+                "id": "<Mongodb generated inventory id>"
               }
             }
           },
@@ -260,7 +277,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfully deleted the country.",
+            "description": "Successfully deleted the inventory entry.",
             "content": {
               "application/json": {
                 "example": {
@@ -306,7 +323,83 @@
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Country with id: <id> not found.",
+                  "message": "Item with id: <id> not found.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 404,
+                  "isError": true
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Internal server error/ Could not perform action.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 500,
+                  "isError": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/inventory/{id}": {
+      "get": {
+        "tags": ["Inventory Controller"],
+        "summary": "Fetches all the inventories.",
+        "description": "This endpoint fetches all the inventories with minimum details if they exist in the system.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The mongodb generated id of the inventory."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetched successfully.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Fetched successfully.",
+                  "data": [{}, {}, "..."],
+                  "status": true,
+                  "httpResponse": 200,
+                  "isError": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Access Denied. No token provided./Invalid token/Access token expired at <Date>. Please login again.",
+                  "data": "<Error details or null>",
+                  "status": false,
+                  "httpResponse": 401,
+                  "isError": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Inventories not found.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 404,

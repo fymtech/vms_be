@@ -8,6 +8,7 @@ const authRoutes = require("./auth.route");
 const adminRoutes = require("./admin.route");
 const clientRoutes = require("./client.route");
 const itemRoutes = require("./item.route");
+const inventoryRoutes = require("./inventory.route");
 const countryRoutes = require("./country.route");
 const professionRoutes = require("./profession.route");
 
@@ -35,6 +36,10 @@ const defaultRoutes = [
   {
     path: "/api/profession",
     route: professionRoutes,
+  },
+  {
+    path: "/api/inventory",
+    route: inventoryRoutes,
   },
 ];
 
