@@ -352,8 +352,8 @@
     "/api/inventory/{id}": {
       "get": {
         "tags": ["Inventory Controller"],
-        "summary": "Fetches all the inventories.",
-        "description": "This endpoint fetches all the inventories with minimum details if they exist in the system.",
+        "summary": "Fetches the inventory information.",
+        "description": "This endpoint fetches the inventory information with details if they exist in the system. Note that except for the item and client all other fields are optional",
         "parameters": [
           {
             "name": "id",
@@ -372,7 +372,40 @@
               "application/json": {
                 "example": {
                   "message": "Fetched successfully.",
-                  "data": [{}, {}, "..."],
+                  "data": {
+                    "item": {
+                      "id": "<Mongodb generated item id>",
+                      "name_en": "name_en",
+                      "name_ar": "name_ar"
+                    },
+                    "client": {
+                      "id": "<Mongodb generated client id>",
+                      "name_en": "name_en",
+                      "name_ar": "name_ar"
+                    },
+                    "visaProfession": {
+                      "id": "<Mongodb generated visa profession id>",
+                      "name_en": "name_en",
+                      "name_ar": "name_ar"
+                    },
+                    "nationality": {
+                      "id": "<Mongodb generated country id>",
+                      "name_en": "name_en",
+                      "name_ar": "name_ar"
+                    },
+                    "quantity": 100,
+                    "embassy": "Indian Embassy",
+                    "cost": 1500,
+                    "total": 150000,
+                    "paidAmount": 50000,
+                    "pending": 100000,
+                    "visaNumber": "V123456789",
+                    "unitedNumber": "U987654321",
+                    "establishmentNumber": "E123456789",
+                    "comments": "Urgent processing required",
+                    "modeOfPayment": "Card",
+                    "dateOfPayment": "2024-01-15"
+                  },
                   "status": true,
                   "httpResponse": 200,
                   "isError": false
