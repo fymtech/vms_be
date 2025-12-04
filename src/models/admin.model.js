@@ -4,8 +4,7 @@ const validator = require("validator");
 
 const AdminSchema = new mongoose.Schema(
   {
-    firstName: { type: String, required: true, maxlength: 20 },
-    lastName: { type: String, required: true, maxlength: 20 },
+    name: { type: String, required: true, maxlength: 100 },
     email: {
       type: String,
       required: true,

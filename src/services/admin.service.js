@@ -186,17 +186,9 @@ const getAllAdmins = async () => {
     }
 
     const adminsInfo = admins.map(
-      ({
-        _id: id,
-        firstName,
-        lastName,
-        email,
-        countryCode,
-        phone,
-        status,
-      }) => ({
+      ({ _id: id, name, email, countryCode, phone, status }) => ({
         id,
-        name: `${firstName} ${lastName}`,
+        name,
         email,
         countryCode,
         phone,
@@ -225,8 +217,7 @@ const getAdminById = async (adminId) => {
 
     const {
       _id: id,
-      firstName,
-      lastName,
+      name,
       email,
       countryCode,
       phone,
@@ -237,7 +228,7 @@ const getAdminById = async (adminId) => {
     } = admin;
     return responseHandler(CustomSuccessResponse.FETCHED, {
       id,
-      name: `${firstName} ${lastName}`,
+      name,
       email,
       countryCode,
       phone,
