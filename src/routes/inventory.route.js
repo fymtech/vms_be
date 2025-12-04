@@ -20,11 +20,11 @@ router
     validation(create),
     inventoryController.create
   )
-  .put(
-    authMiddleware.authenticateToken,
-    validation(updateById),
-    inventoryController.updateById
-  )
+  // .put(
+  //   authMiddleware.authenticateToken,
+  //   validation(updateById),
+  //   inventoryController.updateById
+  // )
   .delete(
     authMiddleware.authenticateToken,
     validation(deleteById),

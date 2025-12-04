@@ -21,6 +21,7 @@ const create = Joi.object({
     total: Joi.number().optional(), // All amounts in Saudi Riyal
     paidAmount: Joi.number().optional(),
     pending: Joi.number().optional(),
+    currency: Joi.string().optional(),
     visaNumber: Joi.string().optional(),
     unitedNumber: Joi.string().optional(),
     establishmentNumber: Joi.string().optional(),

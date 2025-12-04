@@ -26,6 +26,7 @@ const InventorySchema = new mongoose.Schema(
     total: { type: Number },
     paidAmount: { type: Number },
     pending: { type: Number }, // Balance
+    currency: { type: String },
     visaNumber: { type: String },
     unitedNumber: { type: String },
     establishmentNumber: { type: String },

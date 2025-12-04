@@ -25,6 +25,7 @@
                 "total": 150000,
                 "paidAmount": 50000,
                 "pending": 100000,
+                "currency": "SAR",
                 "visaNumber": "V123456789",
                 "unitedNumber": "U987654321",
                 "establishmentNumber": "E123456789",
@@ -134,109 +135,6 @@
               "application/json": {
                 "example": {
                   "message": "Inventories not found.",
-                  "data": "<Error details or null>",
-                  "status": false,
-                  "httpResponse": 404,
-                  "isError": true
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Internal server error/ Could not perform action.",
-                  "data": "<Error details or null>",
-                  "status": false,
-                  "httpResponse": 500,
-                  "isError": true
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["Inventory Controller"],
-        "summary": "Updates the inventory.",
-        "description": "Updates the inventory provided by the id, if it exists in the system.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "example": {
-                "id": "<Mongodb generated inventory id>",
-                "item": "<Mongodb generated item id",
-                "client": "<Mongodb generated client id>",
-                "visaProfession": "<Mongodb generated visa profession id>",
-                "nationality": "<Mongodb generated nationality id>",
-                "quantity": 100,
-                "embassy": "Indian Embassy",
-                "cost": 1500,
-                "total": 150000,
-                "paidAmount": 50000,
-                "pending": 100000,
-                "visaNumber": "V123456789",
-                "unitedNumber": "U987654321",
-                "establishmentNumber": "E123456789",
-                "comments": "Urgent processing required",
-                "modeOfPayment": "Card",
-                "dateOfPayment": "2024-01-15"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successfully updated the inventory.",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Updated Succesfully.",
-                  "data": null,
-                  "status": true,
-                  "httpResponse": 200,
-                  "isError": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Data validation error/Invalid parameter ID.",
-                  "data": "<Error details or null>",
-                  "status": false,
-                  "httpResponse": 400,
-                  "isError": true
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Access Denied. No token provided./Invalid token/Access token expired at <Date>. Please login again.",
-                  "data": "<Error details or null>",
-                  "status": false,
-                  "httpResponse": 401,
-                  "isError": true
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Inventory with id: <id> not found.",
                   "data": "<Error details or null>",
                   "status": false,
                   "httpResponse": 404,
@@ -380,8 +278,8 @@
                     },
                     "client": {
                       "id": "<Mongodb generated client id>",
-                      "name_en": "name_en",
-                      "name_ar": "name_ar"
+                      "name": "name",
+                      "phone": "+966500000000"
                     },
                     "visaProfession": {
                       "id": "<Mongodb generated visa profession id>",
@@ -399,6 +297,7 @@
                     "total": 150000,
                     "paidAmount": 50000,
                     "pending": 100000,
+                    "currency": "SAR",
                     "visaNumber": "V123456789",
                     "unitedNumber": "U987654321",
                     "establishmentNumber": "E123456789",
