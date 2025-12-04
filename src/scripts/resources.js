@@ -2,11 +2,10 @@ const mongoose = require("mongoose");
 const Resources = require("../models/resource.model");
 
 const doc = [
-  { name: "HOME_PAGE" },
-  { name: "CATALOG" },
-  { name: "CUSTOMER" },
-  { name: "CHAT" },
-  { name: "TICKETS" },
+  { name: "DASHBOARD" },
+  { name: "CLIENT" },
+  { name: "ASSETS" },
+  { name: "SETTINGS" },
 ];
 (async () => {
   try {

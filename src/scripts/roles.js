@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Roles = require("../models/role.model");
 
-const doc = [{ name: "CUSTOMER" }, { name: "ADMIN" }, { name: "SUPPORT" }];
+const doc = [{ name: "ADMIN" }, { name: "CLIENT" }];
 (async () => {
   try {
     mongoose
