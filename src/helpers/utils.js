@@ -153,7 +153,6 @@ function runValidation(schema, req) {
               (typeof value === "object" ? Object.keys(value).length > 0 : true)
           )
         );
-  console.log(JSON.stringify(requestData), " =====> requestData");
   // Validate the existing requestData
   const { error, value } = schema.validate(requestData, {
     abortEarly: false,

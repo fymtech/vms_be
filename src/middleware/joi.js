@@ -16,7 +16,6 @@ function validate(schema) {
       );
       return res.status(response.httpResponse).send(response);
     }
-    console.log("VALIDATED DATA ===> ", JSON.stringify(validatedData));
     // Assign validated values back to req
     req.body = validatedData.body;
     req.params = validatedData.params;
