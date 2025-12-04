@@ -7,6 +7,7 @@ const validation = require("../middleware/joi");
 const clientController = require("../controllers/client.controller");
 const authMiddleware = require("../middleware/auth");
 const { clientRegister } = require("../validation_schemas/request/client");
+const { objectIdValidator } = require("../helpers/utils");
 
 router.post(
   "/register",
@@ -33,6 +34,13 @@ router.get(
 router.get(
   "/:id",
   authMiddleware.authenticateToken,
+  validation({
+    params: Joi.object({
+      id: Joi.string()
+        .custom(objectIdValidator, "ObjectId validation")
+        .required(),
+    }).required(),
+  }),
   clientController.getClientById
 );
 

@@ -47,6 +47,7 @@ const getAllClients = async (page, limit, search) => {
         { name: { $regex: s, $options: "i" } },
         { email: { $regex: s, $options: "i" } },
         { phone: { $regex: s, $options: "i" } },
+        { idNumber: { $regex: s, $options: "i" } },
       ];
     }
 
@@ -77,12 +78,13 @@ const getAllClients = async (page, limit, search) => {
     }
 
     const clientsInfo = clients.map(
-      ({ _id: id, name, email, countryCode, phone }) => ({
+      ({ _id: id, name, email, countryCode, phone, idNumber }) => ({
         id,
         name,
         email,
         countryCode,
         phone,
+        idNumber,
       })
     );
 
@@ -113,13 +115,22 @@ const getClientById = async (clientId) => {
         true
       );
 
-    const { _id: id, name, email, countryCode, phone, profileImage } = client;
+    const {
+      _id: id,
+      name,
+      email,
+      countryCode,
+      phone,
+      idNumber,
+      profileImage,
+    } = client;
     return responseHandler(CustomSuccessResponse.FETCHED, {
       id,
       name,
       email,
       countryCode,
       phone,
+      idNumber,
       profileImage,
     });
   } catch (error) {

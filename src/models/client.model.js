@@ -39,6 +39,7 @@ const ClientSchema = new mongoose.Schema(
     },
     registeredAt: { type: Date, required: true },
     profileImage: { type: String },
+    idNumber: { type: String }, // This is the id number field which could be national id of a saudi or an iqama of non-saudi
   },
   { timestamps: true, collection: "Clients" }
 );

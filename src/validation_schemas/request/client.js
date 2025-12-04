@@ -10,6 +10,7 @@ const clientRegister = Joi.object({
     countryId: Joi.string()
       .custom(objectIdValidator, "ObjectId validation")
       .required(),
+    idNumber: Joi.string().allow("").optional(),
     profileImage: Joi.string().allow("").optional(),
   }).required(),
 });
