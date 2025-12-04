@@ -15,8 +15,7 @@
           "content": {
             "application/json": {
               "example": {
-                "firstName": "John",
-                "lastName": "Doe",
+                "name": "John Doe",
                 "email": "johndoe@mail.com",
                 "countryCode": "+91",
                 "phone": "1234567890",
@@ -120,6 +119,38 @@
         "tags": ["Client Controller"],
         "summary": "Fetches all the client if they exist in the system",
         "description": "This endpoint fetches all the client profiles if they exist in the system.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            },
+            "description": "The page number for pagination."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 10
+            },
+            "description": "The number of clients to return per page."
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "John"
+            },
+            "description": "Optional search term to filter clients by name, phone or email."
+          }
+        ],
         "responses": {
           "200": {
             "description": "Fetched successfully.",

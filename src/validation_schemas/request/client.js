@@ -3,8 +3,7 @@ const { objectIdValidator } = require("../../helpers/utils");
 
 const clientRegister = Joi.object({
   body: Joi.object({
-    firstName: Joi.string().min(3).max(20).required(),
-    lastName: Joi.string().min(3).max(20).required(),
+    name: Joi.string().min(3).max(100).required(),
     email: Joi.string().email().required(),
     countryCode: Joi.string().min(3).required(),
     phone: Joi.string().min(9).max(10).required(),

@@ -13,7 +13,8 @@ const register = async (req, res) => {
 
 const getAllClients = async (req, res) => {
   try {
-    const response = await clientService.getAllClients();
+    const { page, limit, search } = req.query;
+    const response = await clientService.getAllClients(page, limit, search);
     res.status(response.httpResponse).send(response);
   } catch (error) {
     const errorResponse = errorResponseHandler(error);

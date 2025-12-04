@@ -35,9 +35,36 @@ const register = async (body, userType) => {
   }
 };
 
-const getAllClients = async () => {
+const getAllClients = async (page, limit, search) => {
   try {
-    const clients = await Clients.find();
+    const filter = {};
+
+    // Build search filter only when needed
+    if (search && search.trim() !== "") {
+      const s = search.trim();
+
+      filter.$or = [
+        { name: { $regex: s, $options: "i" } },
+        { email: { $regex: s, $options: "i" } },
+        { phone: { $regex: s, $options: "i" } },
+      ];
+    }
+
+    // Pagination
+    const skip = (page - 1) * limit;
+
+    // Query
+    const [clients, totalDocuments] = await Promise.all([
+      Clients.find(filter).skip(skip).limit(limit).lean(),
+      Clients.countDocuments(filter),
+    ]);
+
+    /**
+     * You can avoid Promise.all, but:
+     *  - Sequential await = slower
+     *  - Aggregate with $facet = heavier
+     *  - Promise.all = fastest & cleanest
+     */
 
     if (!clients || clients.length == 0) {
       return responseHandler(
@@ -49,17 +76,25 @@ const getAllClients = async () => {
       );
     }
 
-    const clientsInfo = admins.map(
-      ({ _id: id, firstName, lastName, email, countryCode, phone }) => ({
+    const clientsInfo = clients.map(
+      ({ _id: id, name, email, countryCode, phone }) => ({
         id,
-        name: `${firstName} ${lastName}`,
+        name,
         email,
         countryCode,
         phone,
       })
     );
 
-    return responseHandler(CustomSuccessResponse.FETCHED, clientsInfo);
+    const totalPages = Math.ceil(totalDocuments / limit);
+
+    return responseHandler(CustomSuccessResponse.FETCHED, {
+      page,
+      limit,
+      totalDocuments,
+      totalPages,
+      data: clientsInfo,
+    });
   } catch (error) {
     console.error("Error fetching clients:", error);
     return errorResponseHandler(error);
@@ -78,18 +113,10 @@ const getClientById = async (clientId) => {
         true
       );
 
-    const {
-      _id: id,
-      firstName,
-      lastName,
-      email,
-      countryCode,
-      phone,
-      profileImage,
-    } = admin;
+    const { _id: id, name, email, countryCode, phone, profileImage } = client;
     return responseHandler(CustomSuccessResponse.FETCHED, {
       id,
-      name: `${firstName} ${lastName}`,
+      name,
       email,
       countryCode,
       phone,

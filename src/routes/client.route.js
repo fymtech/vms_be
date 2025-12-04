@@ -1,4 +1,5 @@
 const express = require("express");
+const Joi = require("joi");
 
 const router = express.Router();
 
@@ -17,6 +18,15 @@ router.post(
 router.get(
   "/",
   authMiddleware.authenticateToken,
+  validation(
+    Joi.object({
+      query: Joi.object({
+        page: Joi.number().integer().min(1).default(1).required(),
+        limit: Joi.number().integer().min(1).max(100).default(10).required(),
+        search: Joi.string().allow("").optional(),
+      }),
+    }).required()
+  ),
   clientController.getAllClients
 );
 
