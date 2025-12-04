@@ -159,24 +159,30 @@
               "application/json": {
                 "example": {
                   "message": "Fetched successfully.",
-                  "data": [
-                    {
-                      "id": "<Mongodb generated id>",
-                      "name": "Client 1 Name",
-                      "email": "client1@mail.com",
-                      "countryCode": "+966",
-                      "phone": "543485942",
-                      "idNumber": ""
-                    },
-                    {
-                      "id": "<Mongodb generated id>",
-                      "name": "Client 2 Name",
-                      "email": "client2@mail.com",
-                      "countryCode": "+966",
-                      "phone": "536746534",
-                      "idNumber": "A123456789"
-                    }
-                  ],
+                  "data": {
+                    "page": 1,
+                    "limit": 10,
+                    "totalDocuments": 50,
+                    "totalPages": 5,
+                    "data": [
+                      {
+                        "id": "<Mongodb generated id>",
+                        "name": "Client 1 Name",
+                        "email": "client1@mail.com",
+                        "countryCode": "+966",
+                        "phone": "543485942",
+                        "idNumber": ""
+                      },
+                      {
+                        "id": "<Mongodb generated id>",
+                        "name": "Client 2 Name",
+                        "email": "client2@mail.com",
+                        "countryCode": "+966",
+                        "phone": "536746534",
+                        "idNumber": "A123456789"
+                      }
+                    ]
+                  },
                   "status": true,
                   "httpResponse": 200,
                   "isError": false

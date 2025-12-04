@@ -13,7 +13,8 @@ const create = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    const response = await inventoryService.getAll();
+    const { page, limit, search } = req.query;
+    const response = await inventoryService.getAll(page, limit, search);
     res.status(response.httpResponse).send(response);
   } catch (error) {
     const errorResponse = errorResponseHandler(error);
