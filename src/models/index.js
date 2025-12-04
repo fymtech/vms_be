@@ -1,5 +1,4 @@
 module.exports.Admins = require("./admin.model");
-module.exports.Cities = require("./city.model");
 module.exports.Clients = require("./client.model");
 module.exports.Countries = require("./country.model");
 module.exports.Inventories = require("./inventory.model");
@@ -10,4 +9,5 @@ module.exports.ResourceActions = require("./resource.action.model");
 module.exports.Resources = require("./resource.model");
 module.exports.Roles = require("./role.model");
 module.exports.States = require("./state.model");
+module.exports.Settings = require("./setting.model");
 module.exports.Tokens = require("./token.model");

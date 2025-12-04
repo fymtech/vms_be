@@ -11,6 +11,7 @@ const itemRoutes = require("./item.route");
 const inventoryRoutes = require("./inventory.route");
 const countryRoutes = require("./country.route");
 const professionRoutes = require("./profession.route");
+const settingRoutes = require("./setting.route");
 
 const defaultRoutes = [
   {
@@ -26,20 +27,24 @@ const defaultRoutes = [
     route: clientRoutes,
   },
   {
-    path: "/api/item",
-    route: itemRoutes,
-  },
-  {
     path: "/api/country",
     route: countryRoutes,
+  },
+  {
+    path: "/api/inventory",
+    route: inventoryRoutes,
+  },
+  {
+    path: "/api/item",
+    route: itemRoutes,
   },
   {
     path: "/api/profession",
     route: professionRoutes,
   },
   {
-    path: "/api/inventory",
-    route: inventoryRoutes,
+    path: "/api/setting",
+    route: settingRoutes,
   },
 ];
 

@@ -1,0 +1,172 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Auth APIs",
+        "version": "1.0.0",
+        "description": "API documentation for Auth endpoint"
+    },
+    "paths": {
+        "/api/setting/": {
+            "get": {
+                "tags": [
+                    "Settings Controller"
+                ],
+                "summary": "Fetches the settings",
+                "description": "This endpoint fetches settings if they exist in the system.",
+                "responses": {
+                    "200": {
+                        "description": "Fetched successfully.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Fetched successfully.",
+                                    "data": {
+                                        "id": "<Mongodb generated id>",
+                                        "rows_per_page": 10,
+                                        "ui_theme": "light"
+                                    },
+                                    "status": true,
+                                    "httpResponse": 200,
+                                    "isError": false
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Access Denied. No token provided./Invalid token/Access token expired at <Date>. Please login again.",
+                                    "data": "<Error details or null>",
+                                    "status": false,
+                                    "httpResponse": 401,
+                                    "isError": true
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Settings not found.",
+                                    "data": "<Error details or null>",
+                                    "status": false,
+                                    "httpResponse": 404,
+                                    "isError": true
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Internal server error/ Could not perform action.",
+                                    "data": "<Error details or null>",
+                                    "status": false,
+                                    "httpResponse": 500,
+                                    "isError": true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Settings Controller"
+                ],
+                "summary": "Updates the setting.",
+                "description": "Updates an settings record if it exists in the system.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "id": "<Mongodb generated id>",
+                                "rows_per_page": 10,
+                                "ui_theme": "light"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully updated the setting.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Updated Succesfully.",
+                                    "data": null,
+                                    "status": true,
+                                    "httpResponse": 200,
+                                    "isError": false
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Data validation error/Invalid parameter ID.",
+                                    "data": "<Error details or null>",
+                                    "status": false,
+                                    "httpResponse": 400,
+                                    "isError": true
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Access Denied. No token provided./Invalid token/Access token expired at <Date>. Please login again.",
+                                    "data": "<Error details or null>",
+                                    "status": false,
+                                    "httpResponse": 401,
+                                    "isError": true
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Settings with id: <id> not found.",
+                                    "data": "<Error details or null>",
+                                    "status": false,
+                                    "httpResponse": 404,
+                                    "isError": true
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Internal server error/ Could not perform action.",
+                                    "data": "<Error details or null>",
+                                    "status": false,
+                                    "httpResponse": 500,
+                                    "isError": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
