@@ -4,12 +4,15 @@
 - Settings API
 - Add id details in client onboarding
 - Replace firstname and lastname with just name for clients as well as admins
+    - Admins
 - Auth APIs:
     - change password
 - Export APIs into csv and pdf for client information
 - Inventory API: 
     - update it to upload images/docs.
     - Add currency field.
+- Pagination and filter for inventory and client getAll apis
+    - inventory
 
 # UI notes
 
