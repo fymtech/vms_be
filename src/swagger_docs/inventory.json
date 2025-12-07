@@ -130,6 +130,16 @@
               "example": "John"
             },
             "description": "Optional search term to filter inventory by item, profession or country (english or arabic name), client name or phone, embassy, visa number, united number, establishment number, mode of payment and comments (if any)."
+          },
+          {
+            "name": "clientId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6935748b7db8cfac5ad0b90a"
+            },
+            "description": "The mongodb generated id of the client whose inventories are to be fetched."
           }
         ],
         "responses": {

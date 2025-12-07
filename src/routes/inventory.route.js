@@ -12,6 +12,7 @@ const {
   deleteById,
   getById,
 } = require("../validation_schemas/request/inventory");
+const { objectIdValidator } = require("../helpers/utils");
 
 router
   .route("/")
@@ -20,6 +21,9 @@ router
     validation(
       Joi.object({
         query: Joi.object({
+          clientId: Joi.string()
+            .custom(objectIdValidator, "ObjectId validation")
+            .required(),
           page: Joi.number().integer().min(1).default(1).required(),
           limit: Joi.number().integer().min(1).max(100).default(10).required(),
           search: Joi.string().allow("").optional(),

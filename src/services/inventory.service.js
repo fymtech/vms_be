@@ -1,4 +1,5 @@
 const { status } = require("http-status");
+const mongoose = require("mongoose");
 
 const { responseHandler, errorResponseHandler } = require("../helpers/utils");
 const {
@@ -59,7 +60,7 @@ const create = async (body, itemId, clientId, professionId, countryId) => {
   }
 };
 
-const getAll = async (page, limit, search) => {
+const getAll = async (page, limit, search, clientId) => {
   try {
     // sanitize/normalize inputs (optional if validated earlier)
     page = Number(page) || 1;
@@ -77,11 +78,22 @@ const getAll = async (page, limit, search) => {
     // Build aggregation pipeline
     const pipeline = [];
 
-    // 1) Lookups to join referenced collections (like populate)
+    // -------------------------------------
+    // 1. Filter by client FIRST
+    // -------------------------------------
+    if (clientId) {
+      pipeline.push({
+        $match: {
+          client: new mongoose.Types.ObjectId(clientId),
+        },
+      });
+    }
+
+    // 2) Lookups to join referenced collections (like populate)
     pipeline.push(
       {
         $lookup: {
-          from: "items", // collection name for ItemModel
+          from: "Items", // collection name for ItemModel
           localField: "item",
           foreignField: "_id",
           as: "item",
@@ -91,7 +103,7 @@ const getAll = async (page, limit, search) => {
 
       {
         $lookup: {
-          from: "clients", // collection name for ClientModel
+          from: "Clients", // collection name for ClientModel
           localField: "client",
           foreignField: "_id",
           as: "client",
@@ -101,7 +113,7 @@ const getAll = async (page, limit, search) => {
 
       {
         $lookup: {
-          from: "professions", // collection name for ProfessionModel
+          from: "Professions", // collection name for ProfessionModel
           localField: "visaProfession",
           foreignField: "_id",
           as: "visaProfession",
@@ -113,7 +125,7 @@ const getAll = async (page, limit, search) => {
 
       {
         $lookup: {
-          from: "countries", // collection name for CountryModel
+          from: "Countries", // collection name for CountryModel
           localField: "nationality",
           foreignField: "_id",
           as: "nationality",
@@ -122,7 +134,7 @@ const getAll = async (page, limit, search) => {
       { $unwind: { path: "$nationality", preserveNullAndEmptyArrays: true } }
     );
 
-    // 2) Optional search stage (against inventory fields and joined fields)
+    // 3) Optional search stage (against inventory fields and joined fields)
     if (searchRegex) {
       pipeline.push({
         $match: {
