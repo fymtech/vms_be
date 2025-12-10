@@ -4,7 +4,7 @@ const CountrySchema = new mongoose.Schema(
   {
     name_en: { type: String, required: true, unique: true },
     name_ar: { type: String, required: true, unique: true },
-    isoCode: { type: String, unique: true },
+    isoCode: { type: String },
     capital: { type: String },
     currency: { type: String },
     currency_symbol: { type: String },
